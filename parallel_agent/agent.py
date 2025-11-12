@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from google.adk.agents.llm_agent import Agent
+from google.adk.agents import Agent, SequentialAgent, ParallelAgent
 from google.adk.models.google_llm import Gemini
 from google.adk.tools import google_search, AgentTool
 from google.genai.types import HttpRetryOptions
@@ -15,35 +15,61 @@ model = Gemini(
         http_status_codes=[429, 500, 503, 504],
     ),
 )
-
-research_agent = Agent(
-    name="ResearchAgent",
+tech_researcher = Agent(
+    name="TechResearcher",
     model=model,
-    instruction="""You are a specialized research agent. Your only job is to use the
-    google_search tool to find 2-3 pieces of relevant information on the given topic and present the findings with citations.""",
+    instruction="""Research the latest AI/ML trends. Include 3 key developments,
+        the main companies involved, and the potential impact. Keep the report very concise (100 words).""",
     tools=[google_search],
-    output_key="research_findings",  # The result of this agent will be stored in the session state with this key.
+    output_key="tech_research",  # The result of this agent will be stored in the session state with this key.
 )
 
-summarizer_agent = Agent(
-    name="SummarizerAgent",
+health_researcher = Agent(
+    name="HealthResearcher",
     model=model,
-    # The instruction is modified to request a bulleted list for a clear output format.
-    instruction="""Read the provided research findings: {research_findings}
-        Create a concise summary as a bulleted list with 3-5 key points.""",
-    output_key="final_summary",
+    instruction="""Research recent medical breakthroughs. Include 3 significant advances,
+        their practical applications, and estimated timelines. Keep the report concise (100 words).""",
+    tools=[google_search],
+    output_key="health_research",  # The result will be stored with this key.
 )
 
-root_agent = Agent(
-    name="ResearchCoordinator",
+finance_researcher = Agent(
+    name="FinanceResearcher",
     model=model,
-    # This instruction tells the root agent HOW to use its tools (which are the other agents).
-    instruction="""You are a research coordinator. Your goal is to answer the user's query by orchestrating a workflow.
-        1. First, you MUST call the `ResearchAgent` tool to find relevant information on the topic provided by the user.
-        2. Next, after receiving the research findings, you MUST call the `SummarizerAgent` tool to create a concise summary.
-        3. Finally, present the final summary clearly to the user as your response.""",
-    # We wrap the sub-agents in `AgentTool` to make them callable tools for the root agent.
-    tools=[AgentTool(research_agent), AgentTool(summarizer_agent)],
+    instruction="""Research current fintech trends. Include 3 key trends,
+        their market implications, and the future outlook. Keep the report concise (100 words).""",
+    tools=[google_search],
+    output_key="finance_research",  # The result will be stored with this key.
+)
+
+
+aggregator_agent = Agent(
+    name="AggregatorAgent",
+    model=model,
+    # It uses placeholders to inject the outputs from the parallel agents, which are now in the session state.
+    instruction="""Combine these three research findings into a single executive summary:
+
+    **Technology Trends:**
+    {tech_research}
+    
+    **Health Breakthroughs:**
+    {health_research}
+    
+    **Finance Innovations:**
+    {finance_research}
+    
+    Your summary should highlight common themes, surprising connections, and the most important key takeaways from all three reports. The final summary should be around 200 words.""",
+    output_key="executive_summary",  # This will be the final output of the entire system.
+)
+
+parallel_research_team = ParallelAgent(
+    name="ParallelResearchTeam",
+    sub_agents=[tech_researcher, health_researcher, finance_researcher],
+)
+
+root_agent = SequentialAgent(
+    name="ResearchSystem",
+    sub_agents=[parallel_research_team, aggregator_agent],
 )
 
 
@@ -51,7 +77,9 @@ async def main():
     from google.adk.runners import InMemoryRunner
 
     runner = InMemoryRunner(agent=root_agent)
-    response = await runner.run_debug("Research about latest trends in Generative AI")
+    response = await runner.run_debug(
+        "Run the daily executive briefing on Tech, Health, and Finance"
+    )
     # print(response)
 
 
