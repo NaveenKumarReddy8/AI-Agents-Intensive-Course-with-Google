@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
-from google.adk.agents import Agent, SequentialAgent, ParallelAgent
+from google.adk.agents import Agent, ParallelAgent, SequentialAgent
 from google.adk.models.google_llm import Gemini
-from google.adk.tools import google_search, AgentTool
+from google.adk.tools import AgentTool, google_search
 from google.genai.types import HttpRetryOptions
 
 load_dotenv(".env")
@@ -77,9 +77,7 @@ async def main():
     from google.adk.runners import InMemoryRunner
 
     runner = InMemoryRunner(agent=root_agent)
-    response = await runner.run_debug(
-        "Run the daily executive briefing on Tech, Health, and Finance"
-    )
+    response = await runner.run_debug("Run the daily executive briefing on Tech, Health, and Finance")
     # print(response)
 
 

@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from google.adk.agents.llm_agent import Agent
 from google.adk.models.google_llm import Gemini
-from google.adk.tools import google_search, AgentTool
+from google.adk.tools import AgentTool, google_search
 from google.genai.types import HttpRetryOptions
 
 load_dotenv(".env")
