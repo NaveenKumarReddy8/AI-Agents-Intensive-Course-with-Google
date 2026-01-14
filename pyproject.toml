@@ -3,20 +3,28 @@ name = "ai-agents-intensive-course-with-google"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
+authors = [
+    { name = "naveenkumarreddypemmana", email = "naveenkumarreddypemmana@gmail.com" }
+]
 requires-python = ">=3.13"
 dependencies = [
-    "google-adk>=1.18.0",
-    "google-genai>=1.49.0",
+    "google-adk>=1.22.1",
     "python-dotenv>=1.2.1",
 ]
 
+[project.scripts]
+ai-agents-intensive-course-with-google = "ai_agents_intensive_course_with_google:main"
+
+[build-system]
+requires = ["uv_build>=0.9.24,<0.10.0"]
+build-backend = "uv_build"
+
 [dependency-groups]
 dev = [
-    "ruff>=0.14.4",
+    "pyrefly>=0.48.0",
+    "ruff>=0.14.11",
 ]
 
-[tool.ruff]
-line-length=120
 
 [tool.ruff.lint]
-select = ["I"]
+select = ["I", "F"]
