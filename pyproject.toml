@@ -7,7 +7,12 @@ authors = [
     { name = "naveenkumarreddypemmana", email = "naveenkumarreddypemmana@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "google-adk>=1.25.1",
+    "pyright>=1.1.408",
+    "python-dotenv>=1.2.1",
+    "ruff>=0.15.2",
+]
 
 [project.scripts]
 ai-agents-intensive-course-with-google = "ai_agents_intensive_course_with_google:main"
@@ -17,8 +22,18 @@ requires = ["uv_build>=0.9.24,<0.10.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = []
+dev = [
+    "ruff>=0.15.2",
+]
 
 
 [tool.ruff.lint]
 select = ["I", "F"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.pyright]
+pythonVersion = "3.13"
+typeCheckingMode = "basic"
