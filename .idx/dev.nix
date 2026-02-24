@@ -2,12 +2,11 @@
 # see: https://developers.google.com/idx/guides/customize-idx-env
 { pkgs, ... }: {
   # Which nixpkgs channel to use.
-  channel = "stable-25.05"; # or "unstable"
+  channel = "stable-25.11"; # or "unstable"
   # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.python313
     pkgs.gnumake
-    
   ];
   # Sets environment variables in the workspace
   env = {};

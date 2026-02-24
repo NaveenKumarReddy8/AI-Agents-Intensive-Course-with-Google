@@ -7,11 +7,7 @@ authors = [
     { name = "naveenkumarreddypemmana", email = "naveenkumarreddypemmana@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = [
-    "google-adk>=1.22.1",
-    "google-genai>=1.57.0",
-    "python-dotenv>=1.2.1",
-]
+dependencies = []
 
 [project.scripts]
 ai-agents-intensive-course-with-google = "ai_agents_intensive_course_with_google:main"
@@ -21,10 +17,7 @@ requires = ["uv_build>=0.9.24,<0.10.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = [
-    "pyrefly>=0.48.0",
-    "ruff>=0.14.11",
-]
+dev = []
 
 
 [tool.ruff.lint]
