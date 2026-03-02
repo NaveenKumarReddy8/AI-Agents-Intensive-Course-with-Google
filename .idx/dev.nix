@@ -9,12 +9,19 @@
     pkgs.gnumake
   ];
   # Sets environment variables in the workspace
-  env = {};
+  env = { };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
       "ms-python.python"
       "ms-python.debugpy"
+      "charliermarsh.ruff"
+      "ms-azuretools.vscode-docker"
+      "ms-azuretools.vscode-containers"
+      "aaron-bond.better-comments"
+      "codezombiech.gitignore"
+      "tamasfe.even-better-toml"
+      "yzhang.markdown-all-in-one"
     ];
     workspace = {
       # Runs when a workspace is first created with this `dev.nix` file
@@ -24,7 +31,7 @@
           source $HOME/.local/bin/env
         '';
         # Open editors for the following files by default, if they exist:
-        default.openFiles = ["README.md"];
+        default.openFiles = [ "README.md" ];
       };
       onStart = {
         install-dependencies = ''
