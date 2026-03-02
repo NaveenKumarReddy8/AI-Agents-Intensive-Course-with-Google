@@ -2,7 +2,7 @@ from google.adk.agents import Agent
 from google.adk.tools import google_search
 
 from multi_agent.config import model
-print(dsfds)
+
 research_agent = Agent(
     name="ResearchAgent",
     model=model,
@@ -11,7 +11,6 @@ research_agent = Agent(
     tools=[google_search],
     output_key="research_findings",  # The result of this agent will be stored in the session state with this key.
 )
-
 summarizer_agent = Agent(
     name="SummarizerAgent",
     model=model,

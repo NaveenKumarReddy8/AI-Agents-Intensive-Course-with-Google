@@ -1,2 +1,3 @@
 lint:
-	python -m uv run ty --check
+	uv run ruff check --fix --exit-zero
+	uv run ruff format
