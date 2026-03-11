@@ -2,7 +2,7 @@ from google.adk.agents import Agent, ParallelAgent, SequentialAgent
 from google.adk.runners import InMemoryRunner
 from google.adk.tools import google_search
 
-from .config import model
+from agent_tools.config import model
 
 tech_researcher = Agent(
     name="TechResearcher",

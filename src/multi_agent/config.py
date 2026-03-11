@@ -12,4 +12,4 @@ http_retry_config = HttpRetryOptions(
     http_status_codes=[429, 500, 503, 504],  # Retry on these HTTP errors
 )
 
-model = Gemini(name="gemini-2.5-flash-lite", retry_options=http_retry_config)
+model = Gemini(name="gemini-3.1-flash-lite-preview", retry_options=http_retry_config)

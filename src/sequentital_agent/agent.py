@@ -1,7 +1,7 @@
 from google.adk.agents import Agent, SequentialAgent
 from google.adk.runners import InMemoryRunner
 
-from .config import model
+from agent_tools.config import model
 
 outline_agent = Agent(
     name="OutlineAgent",

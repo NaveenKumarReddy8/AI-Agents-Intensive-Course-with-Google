@@ -28,7 +28,7 @@ dev = [
 
 
 [tool.ruff.lint]
-select = ["I", "F"]
+select = ["I", "F", "FURB"]
 
 [tool.ruff]
 line-length = 120

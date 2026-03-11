@@ -2,7 +2,7 @@ from google.adk.agents import Agent, LoopAgent, SequentialAgent
 from google.adk.runners import InMemoryRunner
 from google.adk.tools import FunctionTool
 
-from .config import model
+from agent_tools.config import model
 
 initial_writer_agent = Agent(
     name="InitialWriterAgent",
