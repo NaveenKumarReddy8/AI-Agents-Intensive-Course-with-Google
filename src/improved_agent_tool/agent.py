@@ -20,6 +20,7 @@ def get_fee_for_payment_method(method: str) -> dict:
         Dictionary with status and fee information.
         Success: {"status": "success", "fee_percentage": 0.02}
         Error: {"status": "error", "error_message": "Payment method not found"}
+
     """
     # This simulates looking up a company's internal fee structure.
     fee_database = {
@@ -49,8 +50,8 @@ def get_exchange_rate(base_currency: str, target_currency: str) -> dict:
         Dictionary with status and rate information.
         Success: {"status": "success", "rate": 0.93}
         Error: {"status": "error", "error_message": "Unsupported currency pair"}
-    """
 
+    """
     # Static data simulating a live exchange rate API
     # In production, this would call something like: requests.get("api.exchangerates.com")
     rate_database = {
@@ -58,7 +59,7 @@ def get_exchange_rate(base_currency: str, target_currency: str) -> dict:
             "eur": 0.93,  # Euro
             "jpy": 157.50,  # Japanese Yen
             "inr": 83.58,  # Indian Rupee
-        }
+        },
     }
 
     # Input validation and processing
@@ -120,6 +121,7 @@ root_agent = Agent(
     ],
 )
 
+
 def show_python_code_and_result(response):
     for i in range(len(response)):
         # Check if the response contains a valid function call result from the code executor
@@ -143,7 +145,7 @@ def show_python_code_and_result(response):
 async def main():
     currency_runner = InMemoryRunner(agent=root_agent)
     response = await currency_runner.run_debug(
-        "Convert 1,250 USD to INR using a Bank Transfer. Show me the precise calculation."
+        "Convert 1,250 USD to INR using a Bank Transfer. Show me the precise calculation.",
     )
     print("The python code is:")
     show_python_code_and_result(response=response)

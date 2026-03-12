@@ -37,7 +37,7 @@ root_agent = Agent(
 async def main():
     runner = InMemoryRunner(agent=root_agent)
     response = await runner.run_debug(
-        "What are the latest advancements in quantum computing and what do they mean for AI?"
+        "What are the latest advancements in quantum computing and what do they mean for AI?",
     )
     print(response)
 

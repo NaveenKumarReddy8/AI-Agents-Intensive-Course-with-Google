@@ -18,6 +18,7 @@ def get_fee_for_payment_method(method: str) -> dict:
         Dictionary with status and fee information.
         Success: {"status": "success", "fee_percentage": 0.02}
         Error: {"status": "error", "error_message": "Payment method not found"}
+
     """
     # This simulates looking up a company's internal fee structure.
     fee_database = {
@@ -47,8 +48,8 @@ def get_exchange_rate(base_currency: str, target_currency: str) -> dict:
         Dictionary with status and rate information.
         Success: {"status": "success", "rate": 0.93}
         Error: {"status": "error", "error_message": "Unsupported currency pair"}
-    """
 
+    """
     # Static data simulating a live exchange rate API
     # In production, this would call something like: requests.get("api.exchangerates.com")
     rate_database = {
@@ -56,7 +57,7 @@ def get_exchange_rate(base_currency: str, target_currency: str) -> dict:
             "eur": 0.93,  # Euro
             "jpy": 157.50,  # Japanese Yen
             "inr": 83.58,  # Indian Rupee
-        }
+        },
     }
 
     # Input validation and processing
@@ -95,7 +96,7 @@ root_agent = Agent(
 async def main():
     currency_runner = InMemoryRunner(agent=root_agent)
     _ = await currency_runner.run_debug(
-        "I want to convert 500 US Dollars to Euros using my Platinum Credit Card. How much will I receive?"
+        "I want to convert 500 US Dollars to Euros using my Platinum Credit Card. How much will I receive?",
     )
 
 

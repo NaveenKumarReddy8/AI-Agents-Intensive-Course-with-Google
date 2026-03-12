@@ -61,7 +61,7 @@ root_agent = SequentialAgent(
 async def main():
     runner = InMemoryRunner()
     response = await runner.run_debug(
-        "Write a short story about a lighthouse keeper who discovers a mysterious, glowing map"
+        "Write a short story about a lighthouse keeper who discovers a mysterious, glowing map",
     )
     print(response)
 

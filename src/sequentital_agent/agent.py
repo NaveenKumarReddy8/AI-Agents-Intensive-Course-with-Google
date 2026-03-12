@@ -40,7 +40,7 @@ root_agent = SequentialAgent(
 async def main():
     runner = InMemoryRunner()
     response = await runner.run_debug(
-        "Write a blog post about the benefits of multi-agent systems for software developers"
+        "Write a blog post about the benefits of multi-agent systems for software developers",
     )
     print(response)
 
